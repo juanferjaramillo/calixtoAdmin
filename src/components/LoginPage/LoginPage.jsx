@@ -1,14 +1,9 @@
-import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import React, { useState } from "react";
+import { getAllProducts, getAuthUser } from "../../redux/actions";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getAllProducts, getAuthUser } from "../../redux/actions";
-import axios from "axios";
+import { Typography, Grid, Button, TextField } from "@mui/material";
 
-//===========================COMPONENT=============================
 function LoginPage() {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
@@ -17,19 +12,20 @@ function LoginPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  //---------------------------HANDLES------------------------------
+  //---------------------------HANDLERS------------------------------
 
-  const handleSubmit = async(event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     dispatch(getAuthUser(id));
     dispatch(getAllProducts(id));
-    navigate("/products");
+    navigate("/dashboard");
   };
 
   const handleIdChange = (event) => {
     setId(event.target.value);
     validateForm(event.target.value, password);
   };
+
   const handlePswChange = (event) => {
     setPassword(event.target.value);
     validateForm(id, event.target.value);
@@ -47,6 +43,7 @@ function LoginPage() {
   };
 
   //--------------------------RENDER----------------------------
+
   return (
     <Grid container justifyContent={"center"} height={"100vh"} border={1}>
       <Grid

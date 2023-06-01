@@ -1,5 +1,4 @@
-
-
+import { LOGIN } from './action-types.js'
 const initialState={
     authUser: {},
 }
@@ -16,3 +15,5 @@ const reducer = (state=initialState, action) => {
             }
     }
 }
+
+export default reducer
