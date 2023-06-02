@@ -1,6 +1,6 @@
-import { Grid, Typography } from '@mui/material'
-import { Box } from '@mui/system'
 import React from 'react'
+import { Grid, Typography, Box } from '@mui/material'
+import Login from '../../components/Login/Login.jsx'
 
 const styles = {
   principal: {
@@ -30,8 +30,8 @@ export default function Landing() {
         <Grid item xs={12} md={6}>
           <Typography sx={{ alignSelf: "center", fontWeight: "bold", fontSize: "20px" }}>Aquí va lo decorativo/visual de la landing</Typography>
         </Grid>
-        <Grid item xs={12} md={6}>
-          <Typography sx={{ alignSelf: "center", fontWeight: "bold", fontSize: "20px" }}>Aquí va lo decorativo/visual de la landing</Typography>
+        <Grid item xs={12} md={6} sx={{border:"1px solid", display:"flex", justifyContent:"center", alignItems:"center"}}>
+          <Login />
         </Grid>
       </Grid>
       <Box sx={styles.secondary}>
