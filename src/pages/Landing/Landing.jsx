@@ -27,10 +27,10 @@ export default function Landing() {
   return (
     <Box>
       <Grid container sx={styles.principal}>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={6} order={{ xs: 2, md: 1 }}>
           <Typography sx={{ alignSelf: "center", fontWeight: "bold", fontSize: "20px" }}>Aquí va lo decorativo/visual de la landing</Typography>
         </Grid>
-        <Grid item xs={12} md={6} sx={{border:"1px solid", display:"flex", justifyContent:"center", alignItems:"center"}}>
+        <Grid item xs={12} md={6} order={{ xs: 1, md: 2 }} sx={{ border: "1px solid", display: "flex", justifyContent: "center", alignItems: "center" }}>
           <Login />
         </Grid>
       </Grid>

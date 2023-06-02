@@ -20,7 +20,7 @@ export const getAuthUser = (usr) => {
   //brings one specific user to the state
   return async function (dispatch) {
     let oneUsr = {};
-    usr ? (oneUsr = (await axios.get(`/user/${usr}`)).data) : null;
+    usr ? (oneUsr = (await axios.get(`/owner/${usr}`)).data) : null;
     return dispatch({
       type: GET_AUTH_USER,
       payload: oneUsr,
