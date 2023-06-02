@@ -58,7 +58,12 @@ export default function LoginForm() {
                                 error={errors.password && touched.password}
                                 helperText={(errors.password && touched.password) ? errors.password : null}
                             />
-                            <Typography onClick={() => { navigate('/password-recovery') }} sx={{cursor:"pointer", marginBottom:"20px    "}}>Forgot your password?</Typography>
+                            <Typography onClick={() => { navigate('/password-recovery') }} sx={{
+                                cursor: "pointer", marginBottom: "20px", '&:hover': {
+                                    color:"blue",
+                                    textDecoration:"underline"
+                                },
+                            }}>Forgot your password?</Typography>
                             <Button type="submit" variant='contained' disabled={isSubmitting}>
                                 Log In
                             </Button>

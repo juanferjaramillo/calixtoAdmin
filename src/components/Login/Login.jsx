@@ -1,18 +1,24 @@
 import React from 'react'
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Button, Paper, Typography } from '@mui/material'
 import LoginForm from './LoginForm'
 import { useNavigate } from 'react-router-dom'
+import { styled } from '@mui/system';
+
+const StyledPaper = styled(Paper)(({ theme }) => ({
+  borderRadius: "10px",
+  boxShadow: theme.shadows[3],
+}));
 
 export default function Login() {
   const navigate = useNavigate();
-  return (<Box sx={{ display: "flex", flexDirection: "column" }}>
-    <Typography sx={{ alignSelf: "center", marginBottom: "10px", fontSize: "20px" }}>Sign In</Typography>
-    <Box sx={{ width: "25vw", border: "1px solid", height: " 70%", borderRadius: "10px", paddingBottom: "20px" }}>
+  return (<StyledPaper sx={{ display: "flex", flexDirection: "column" }}>
+    <Typography sx={{ alignSelf: "center", marginTop: "15px", marginBottom:"10px", fontSize: "20px" }}>Sign In</Typography>
+    <Box sx={{ width: "25vw", height: " 70%", paddingBottom: "20px" }}>
       <LoginForm />
       <Box sx={{ marginLeft: "20px" }}>
         <Typography>Don't have an account?</Typography>
         <Button onClick={() => { navigate('/register') }} variant={'contained'}>Register</Button>
       </Box>
-    </Box></Box>
+    </Box></StyledPaper>
   )
 }
