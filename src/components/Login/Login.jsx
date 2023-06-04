@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Button, Paper, Typography } from '@mui/material'
+import { Box, Button, Paper, Typography, useTheme} from '@mui/material'
 import LoginForm from './LoginForm'
 import { useNavigate } from 'react-router-dom'
 import { styled } from '@mui/system';
@@ -11,9 +11,10 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
 
 export default function Login() {
   const navigate = useNavigate();
+  const theme = useTheme();
   return (<StyledPaper sx={{ display: "flex", flexDirection: "column" }}>
     <Typography sx={{ alignSelf: "center", marginTop: "15px", marginBottom:"10px", fontSize: "20px" }}>Sign In</Typography>
-    <Box sx={{ width: "25vw", height: " 70%", paddingBottom: "20px" }}>
+    <Box sx={{ [theme.breakpoints.down("sm")]: { width: 300 }, [theme.breakpoints.up("sm")]: { width: 350 }, height: " 70%", paddingBottom: "20px" }}>
       <LoginForm />
       <Box sx={{ marginLeft: "20px" }}>
         <Typography>Don't have an account?</Typography>
