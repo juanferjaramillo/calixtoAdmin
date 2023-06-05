@@ -6,7 +6,7 @@ import axios from "axios";
 import Landing from './pages/Landing/Landing';
 import Register from './pages/Register/Register';
 import PasswordRecovery from './pages/PasswordRecovery/PasswordRecovery';
-import ImportPoducts from './components/importProducts/ImportProducts.jsx'
+import ImportPoducts from './components/importProducts/ImportProducts'
 
 axios.defaults.baseURL = import.meta.env.VITE_SERVER_URL;
 

@@ -1,6 +1,10 @@
-import { GET_ALL_PRODUCTS, GET_AUTH_USER } from './action-types.js'
-import axios from 'axios'
+import {
+  GET_ALL_PRODUCTS,
+  GET_AUTH_USER,
+} from "./action-types.js";
+import axios from "axios";
 
+//-------------------------Product actions----------------------------
 export const getAllProducts = (owner) => {
   //brings all products from db to the state
   return async function (dispatch) {
@@ -16,6 +20,7 @@ export const getAllProducts = (owner) => {
   };
 };
 
+//-------------------------User actions----------------------------
 export const getAuthUser = (usr) => {
   //brings one specific user to the state
   return async function (dispatch) {
@@ -27,4 +32,3 @@ export const getAuthUser = (usr) => {
     });
   };
 };
-
