@@ -6,7 +6,7 @@ const initialState = {
   allProducts: [],
   filteredProducts: [],
   providers: [],
-  authUser: {},
+  authUser: JSON.parse(sessionStorage.getItem("user")) || {},
 };
 
 const reducer = (state = initialState, action) => {

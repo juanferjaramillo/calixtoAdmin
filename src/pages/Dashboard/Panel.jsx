@@ -21,7 +21,7 @@ function Panel(props) {
     return (
         <Box>
             <CssBaseline />
-            <AppBar sx={{ width: "100vw", height: "64px", backgroundColor: "orange", position: "sticky", display: "flex", justifyContent: "center", zIndex:"0" }}>
+            <AppBar sx={{ width: "100vw", height: "64px", backgroundColor: "orange", position: "fixed", display: "flex", justifyContent: "center", flexGrow: 1 }}>
                 <IconButton
                     onClick={handleDrawerToggle}
                     sx={{ display: { xs: 'flex', sm: 'none' }, height: "50px", width: "50px", justifyContent: "center", marginLeft: "12px" }}
@@ -31,7 +31,7 @@ function Panel(props) {
             </AppBar>
             <Box sx={{ display: "flex" }}>
                 <Box
-                    sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 }, zIndex:"0" }}
+                    sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
                 >
                     <Drawer
                         container={container}

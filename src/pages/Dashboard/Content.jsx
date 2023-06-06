@@ -6,7 +6,7 @@ import Card from '../../components/Card/Card.jsx'
 export default function Content({ setModalOpen, modalOpen }) {
   const products = useProducts();
   return (
-    <Box>
+    <Box sx={{display: "flex", flexWrap:"wrap", padding:"10px", marginTop:"64px", justifyContent:"space-around"}}>
       {products?.map((product, index) => {
         return (
           <Card

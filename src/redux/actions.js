@@ -26,6 +26,7 @@ export const getAuthUser = (usr) => {
   return async function (dispatch) {
     let oneUsr = {};
     usr ? (oneUsr = (await axios.get(`/owner/${usr}`)).data) : null;
+    sessionStorage.setItem('user', JSON.stringify(oneUsr))
     return dispatch({
       type: GET_AUTH_USER,
       payload: oneUsr,

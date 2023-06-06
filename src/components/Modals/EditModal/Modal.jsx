@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import './Modal.modules.css'
+import React, { useState } from 'react'
 import { Box, IconButton } from '@mui/material';
+import "./Modal.modules.css"
 import CloseIcon from '@mui/icons-material/Close';
 let handleOpen;
 
@@ -23,19 +23,19 @@ function Modal({ children }) {
   };
 
   return open && (
-    <div className='modal'>
-      <div className='overlay'></div>
-      <div className="modal-content">
-        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-          <IconButton onClick={() => { handleOpen() }}>
-            <CloseIcon />
-          </IconButton>
-        </Box>
-        <Box>
-          {renderChildrenWithProps({ id })}
-        </Box>
-      </div>
-    </div >
+      <div className='modal'>
+        <div className='overlay' onClick={() => { handleOpen() }}></div>
+        <div className="modal-content">
+          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+            <IconButton onClick={() => { handleOpen() }}>
+              <CloseIcon />
+            </IconButton>
+          </Box>
+          <Box>
+            {renderChildrenWithProps({ id })}
+          </Box>
+        </div>
+      </div >
   )
 }
 
