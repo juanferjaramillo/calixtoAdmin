@@ -1,8 +1,11 @@
 import React from 'react'
 import { Formik, Field, Form } from 'formik'
 import * as Yup from 'yup'
-import { Box, Button, Menu, MenuItem, Select, TextField, Typography } from '@mui/material'
-import { useSelector } from 'react-redux'
+import axios from 'axios'
+import { Box, Button, MenuItem, Select, TextField, Typography } from '@mui/material'
+import { useSelector, useDispatch } from 'react-redux'
+import { handleOpen } from '../../components/Modals/EditModal/Modal'
+import { getAllProducts } from '../../redux/actions'
 
 const validationSchema = Yup.object({
     precioBase: Yup.number(),
@@ -11,17 +14,22 @@ const validationSchema = Yup.object({
 
 export default function EditForm({ id }) {
 
+    const dispatch = useDispatch();
+    const user = useSelector(state => state.authUser)
     const product = useSelector(state => state.filteredProducts).find((product) => product.codigo === id)
     const states = useSelector(state => state.authUser.states)
-    const selectedStateName = states.find((state) => state.id === product.stateId).name
-
     const initialValues = {
         precioBase: product.precioBase,
-        stateId: selectedStateName
+        stateId: product.stateId
     }
 
     const submitHandler = async ({ precioBase, stateId }) => {
-        console.log(precioBase, stateId);
+        const result = await axios.patch(`/product/${id}`, {
+            precioBase,
+            stateId
+        })
+        dispatch(getAllProducts(user.id))
+        handleOpen()
     }
 
     return (
@@ -56,9 +64,9 @@ export default function EditForm({ id }) {
                             >
                                 {states.map((state) => {
                                     return (
-                                    <MenuItem key={state.id} value={state.name}>
-                                        {state.name}
-                                    </MenuItem>
+                                        <MenuItem key={state.id} value={state.id}>
+                                            {state.name}
+                                        </MenuItem>
                                     )
                                 })}
                             </Field>
