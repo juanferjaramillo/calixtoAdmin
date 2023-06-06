@@ -3,6 +3,8 @@ import { AppBar, Box, CssBaseline, Drawer, IconButton, Toolbar, Typography } fro
 import drawer from './Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import Content from './Content';
+import { Modal } from '../../components/Modals/EditModal/Modal';
+import EditForm from './EditForm';
 
 const drawerWidth = 200;
 
@@ -19,17 +21,17 @@ function Panel(props) {
     return (
         <Box>
             <CssBaseline />
-            <AppBar sx={{ width: "100vw", height: "64px", backgroundColor: "orange", position: "sticky", display: "flex", justifyContent: "center" }}>
+            <AppBar sx={{ width: "100vw", height: "64px", backgroundColor: "orange", position: "sticky", display: "flex", justifyContent: "center", zIndex:"0" }}>
                 <IconButton
                     onClick={handleDrawerToggle}
-                    sx={{ display: { xs: 'flex', sm: 'none' }, height:"50px", width:"50px", justifyContent: "center", marginLeft: "12px" }}
+                    sx={{ display: { xs: 'flex', sm: 'none' }, height: "50px", width: "50px", justifyContent: "center", marginLeft: "12px" }}
                 >
                     <MenuIcon />
                 </IconButton>
             </AppBar>
-            <Box sx={{display:"flex" }}>
+            <Box sx={{ display: "flex" }}>
                 <Box
-                    sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+                    sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 }, zIndex:"0" }}
                 >
                     <Drawer
                         container={container}
@@ -61,6 +63,9 @@ function Panel(props) {
                     <Content />
                 </Box>
             </Box>
+            <Modal>
+                <EditForm />
+            </Modal>
         </Box>
     );
 }

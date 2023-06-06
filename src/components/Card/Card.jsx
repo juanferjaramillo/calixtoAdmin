@@ -1,7 +1,9 @@
 import React from 'react';
 import { useState } from "react";
-import { Box, Grid, Typography, Divider, useTheme, useMediaQuery, Avatar } from "@mui/material";
+import { Box, Grid, Typography, Divider, useTheme, useMediaQuery, Avatar, IconButton } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import { handleOpen } from '../Modals/EditModal/Modal';
 import Badge from "@mui/material/Badge";
 import style from "./card.module.css"
 
@@ -20,7 +22,6 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
       position: "absolute",
       top: 0,
       left: 0,
-      width: "100%",
       height: "100%",
       borderRadius: "50%",
       animation: "ripple 1.2s infinite ease-in-out",
@@ -70,9 +71,12 @@ function Card(props) {
         borderRadius: 2,
         p: 1,
         borderColor: "lightgray",
-        
+
       }}
     >
+      <IconButton onClick={()=>{handleOpen(props.codigo)}}>
+        <ModeEditIcon />
+      </IconButton>
       {flipped ? (
         //-------------------------------BACK CARD-----------------------------------
 
@@ -89,7 +93,7 @@ function Card(props) {
           }}
         >
           <Typography variant="body1">{`Codigo: ${props.Barras}`}</Typography>
-    
+
           <Typography fontSize={11} textAlign="center" p={1} boxShadow={2}>
             {props.descripcion}
           </Typography>
@@ -100,7 +104,7 @@ function Card(props) {
             height="150vh"
             width="240vh"
             alt="producto"
-            // border="1"
+          // border="1"
           />
 
           <Divider sx={{ width: "80%" }} />
@@ -109,7 +113,7 @@ function Card(props) {
             display={"flex"}
             justifyContent={"center"}
             marginTop={1}
-             >
+          >
             {props.icons?.map((icon, i) => {
               return (
                 <Avatar
@@ -153,7 +157,7 @@ function Card(props) {
             style={{ objectFit: "contain" }}
             src={props.prodImg}
             height="220vh"
-            width="240vh"
+            width="240vw"
             alt="producto"
           />
 
@@ -178,7 +182,7 @@ function Card(props) {
           >
             <Grid item width={200} textAlign={"center"}>
               {cats?.map((k, index) => {
-                return <Typography key={index}variant="body2">{k}</Typography>;
+                return <Typography key={index} variant="body2">{k}</Typography>;
               })}
             </Grid>
           </StyledBadge>

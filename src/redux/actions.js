@@ -11,7 +11,7 @@ export const getAllProducts = (owner) => {
     let allProds = await axios.get(`/prodsowner/${owner}`);
     allProds = allProds.data;
     //brings all products from db
-    const provs = Array.from(new Set(allProds.map((p) => p.providers[0].name)));
+    const provs = Array.from(new Set(allProds.map((p) => p.provider.name)));
     //Creates an array of providers with no repeated values
     return dispatch({
       type: GET_ALL_PRODUCTS,
