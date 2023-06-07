@@ -1,4 +1,5 @@
 import {
+  DELETE_PRODUCT,
   GET_ALL_PRODUCTS,
   GET_AUTH_USER,
 } from "./action-types.js";
@@ -24,6 +25,13 @@ const reducer = (state = initialState, action) => {
         allProducts: allProds,
         filteredProducts: allProds,
         providers: provs,
+      };
+
+    case DELETE_PRODUCT:
+      return {
+        ...state,
+        allProducts: action.payload,
+        filteredProducts: action.payload,
       };
 
     default:

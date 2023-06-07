@@ -1,4 +1,5 @@
 import {
+  DELETE_PRODUCT,
   GET_ALL_PRODUCTS,
   GET_AUTH_USER,
 } from "./action-types.js";
@@ -19,6 +20,17 @@ export const getAllProducts = (owner) => {
     });
   };
 };
+
+export const deleteProduct = (productId) => {
+  return async function (dispatch) {
+    let updatedProds = await axios.delete(`/product/${productId}`);
+    const { data } = updatedProds;
+    return dispatch({
+      type: DELETE_PRODUCT,
+      payload: data,
+    });
+  }
+}
 
 //-------------------------User actions----------------------------
 export const getAuthUser = (usr) => {

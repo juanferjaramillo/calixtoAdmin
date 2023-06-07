@@ -3,9 +3,13 @@ import { useState } from "react";
 import { Box, Grid, Typography, Divider, useTheme, useMediaQuery, Avatar, IconButton } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { handleOpen } from '../Modals/EditModal/Modal';
 import Badge from "@mui/material/Badge";
 import style from "./card.module.css"
+import { deleteProduct } from './../../redux/actions'
+import { useDispatch } from 'react-redux'
+import Swal from 'sweetalert2'
 
 // const colorDot = "green";
 // const colorDot = "orange"
@@ -43,6 +47,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 //-------------------------COMPONENT------------------------
 function Card(props) {
+  const dispatch = useDispatch()
   const [flipped, setFlipped] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -56,6 +61,21 @@ function Card(props) {
   const handleClick = () => {
     setFlipped(!flipped);
   };
+
+  const deleteHandler = () => {
+    Swal.fire({
+      title: '¿Are you sure you want to delete this product?',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancel',
+      confirmButtonText: 'Confirm'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteProduct(props.codigo))
+      }
+    });
+  }
 
   return (
     <Box
@@ -74,9 +94,14 @@ function Card(props) {
 
       }}
     >
-      <IconButton onClick={()=>{handleOpen(props.codigo)}}>
-        <ModeEditIcon />
-      </IconButton>
+      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        <IconButton onClick={() => { handleOpen(props.codigo) }}>
+          <ModeEditIcon />
+        </IconButton>
+        <IconButton onClick={deleteHandler}>
+          <DeleteIcon />
+        </IconButton>
+      </Box>
       {flipped ? (
         //-------------------------------BACK CARD-----------------------------------
 
