@@ -18,9 +18,10 @@ export default function EditForm({ id }) {
     const user = useSelector(state => state.authUser)
     const product = useSelector(state => state.filteredProducts).find((product) => product.codigo === id)
     const states = useSelector(state => state.authUser.states)
+    const isState = states.length > 0;
     const initialValues = {
         precioBase: product.precioBase,
-        stateId: product.stateId
+        stateId: isState ? product.stateId : ""
     }
 
     const submitHandler = async ({ precioBase, stateId }) => {
@@ -54,10 +55,12 @@ export default function EditForm({ id }) {
                                 helpertext={(errors.email && touched.email) ? errors.email : null}
                             />
                             <Typography>State</Typography>
+                            {!isState ? <Typography>You don't have any states</Typography> : null}
                             <Field
                                 placeholder='State'
                                 name='stateId'
                                 sx={{ marginBottom: "20px" }}
+                                disabled={!isState}
                                 as={Select}
                                 error={errors.password && touched.password}
                                 helpertext={(errors.password && touched.password) ? errors.password : null}

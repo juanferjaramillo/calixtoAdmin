@@ -9,7 +9,7 @@
     border-radius: 8px;
     max-width: 600px;
     min-width: 300px;
-    z-index: 1501;
+    z-index: 3;
 }
 
 .modal,.overlay {
@@ -20,12 +20,11 @@
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 1499;
+    z-index: 3;
   }
   
   .overlay {
     background: rgba(49, 49, 49, 0.8);
-    z-index: 1500;
   }
 
 .close-modal {

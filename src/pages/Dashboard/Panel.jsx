@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from 'React';
 import { AppBar, Box, CssBaseline, Drawer, IconButton, Toolbar, Typography } from '@mui/material';
 import drawer from './Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -16,12 +16,12 @@ function Panel(props) {
         setMobileOpen(!mobileOpen);
     };
 
-    const container = window !== undefined ? () => window().document.body : undefined;
+    const container = window!== undefined? () => window().document.body : undefined;
 
     return (
         <Box>
             <CssBaseline />
-            <AppBar sx={{ width: "100vw", height: "64px", backgroundColor: "orange", position: "fixed", display: "flex", justifyContent: "center", flexGrow: 1 }}>
+            <AppBar sx={{ width: "100vw", height: "64px", backgroundColor: "orange", position: "fixed", display: "flex", justifyContent: "center", flexGrow: 1, zIndex:2 }}>
                 <IconButton
                     onClick={handleDrawerToggle}
                     sx={{ display: { xs: 'flex', sm: 'none' }, height: "50px", width: "50px", justifyContent: "center", marginLeft: "12px" }}
@@ -31,7 +31,7 @@ function Panel(props) {
             </AppBar>
             <Box sx={{ display: "flex" }}>
                 <Box
-                    sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+                    sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 }, position: "relative", zIndex: 2 }}
                 >
                     <Drawer
                         container={container}
@@ -43,7 +43,7 @@ function Panel(props) {
                         }}
                         sx={{
                             display: { xs: 'block', sm: 'none' },
-                            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                            '&.MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
                         }}
                     >
                         {drawer}
@@ -52,14 +52,14 @@ function Panel(props) {
                         variant="permanent"
                         sx={{
                             display: { xs: 'none', sm: 'block' },
-                            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                            '&.MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
                         }}
                         open
                     >
                         {drawer}
                     </Drawer>
                 </Box>
-                <Box>
+                <Box sx={{ position: "relative", zIndex: 1, marginTop: "64px" }}>
                     <Content />
                 </Box>
             </Box>
