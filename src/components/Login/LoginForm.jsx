@@ -48,14 +48,14 @@ export default function LoginForm() {
             >
               <Field
                 sx={{ marginBottom: "20px" }}
-                placeholder="E-mail"
+                placeholder="Identificación"
                 name="email"
                 as={TextField}
                 error={errors.email && touched.email}
                 helperText={errors.email && touched.email ? errors.email : null}
               />
               <Field
-                placeholder="Password"
+                placeholder="Contraseña"
                 type="password"
                 name="password"
                 as={TextField}
@@ -82,7 +82,7 @@ export default function LoginForm() {
               <Button type="submit" variant="contained" disabled={isSubmitting}
               sx={{mt: 3, backgroundColor: "purple"}}
               >
-                Log In
+                Ingresar
               </Button>
             </Box>
           </Form>
