@@ -24,7 +24,13 @@ export default function LoginForm() {
 
   const submitHandler = async ({ email, password }) => {
     try {
-      await axios.post(`/session`, { email, password });
+      // await axios.post(`/session`, { email, password });
+      await axios({
+        method: 'post',
+        url: `/session`,
+        data: { email, password },
+        headers: {'Access-Control-Allow-Origin': '*'}
+      })
       dispatch(getAuthUser(email));
       navigate("/dashboard");
     } catch ({ response }) {
