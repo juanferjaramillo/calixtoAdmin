@@ -55,7 +55,7 @@ export default function EditForm({ id }) {
                                 helpertext={(errors.email && touched.email) ? errors.email : null}
                             />
                             <Typography>State</Typography>
-                            {!isState ? <Typography>You don't have any states</Typography> : null}
+                            {!isState ? <Typography>No se encontraron estados!</Typography> : null}
                             <Field
                                 placeholder='State'
                                 name='stateId'
