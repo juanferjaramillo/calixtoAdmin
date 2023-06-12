@@ -27,7 +27,7 @@ export default function LoginForm() {
 
       //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       //await axios.post(`/session`, { email, password });
-      //ESTA PETICION LA RECHAZA CORS 
+      //ESTA PETICION LA RECHAZA CORS  
       //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
       dispatch(getAuthUser(email));
