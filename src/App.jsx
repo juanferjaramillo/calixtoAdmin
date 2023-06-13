@@ -7,6 +7,7 @@ import Landing from './pages/Landing/Landing';
 import Register from './pages/Register/Register';
 import PasswordRecovery from './pages/PasswordRecovery/PasswordRecovery';
 import ImportPoducts from './components/importProducts/ImportProducts'
+import DataGrid from "./components/DataGrid/DataGrid.jsx"
 
 axios.defaults.baseURL = import.meta.env.VITE_SERVER_URL;
 
@@ -18,6 +19,7 @@ const App = () => {
       <Route path={"/password-recovery"} element={<PasswordRecovery />}></Route>
       <Route path={"/dashboard"} element={<Dashboard />}></Route>
       <Route path={"/import"} element={<ImportPoducts />}></Route>
+      <Route path={"/datagrid"} element={<DataGrid />}></Route>
     </Routes>
   );
 };

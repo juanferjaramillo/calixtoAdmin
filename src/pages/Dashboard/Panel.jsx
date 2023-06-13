@@ -5,10 +5,14 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Content from './Content';
 import { Modal } from '../../components/Modals/EditModal/Modal';
 import EditForm from './EditForm';
+import Button from "@mui/material/Button"
+import {useNavigate} from "react-router-dom"
 
 const drawerWidth = 200;
 
 function Panel(props) {
+
+    const navigate = useNavigate();
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -57,6 +61,7 @@ function Panel(props) {
                         open
                     >
                         {drawer}
+                <Button onClick={()=>navigate("/datagrid")}>TABLA</Button>
                     </Drawer>
                 </Box>
                 <Box sx={{ position: "relative", zIndex: 1, marginTop: "64px" }}>
