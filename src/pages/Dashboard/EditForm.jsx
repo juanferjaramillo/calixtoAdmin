@@ -25,10 +25,19 @@ export default function EditForm({ id }) {
     }
 
     const submitHandler = async ({ precioBase, stateId }) => {
-        const result = await axios.patch(`/product/${id}`, {
-            precioBase,
-            stateId
-        })
+        // const result = await axios.patch(`/product/${id}`, {
+        //     precioBase,
+        //     stateId
+        // }) 
+        const result = axios({
+            method: 'patch',
+            url: `/product/${id}`,
+            data: {
+              precioBase,
+              stateId
+            },
+            headers: {'Access-Control-Allow-Origin': '*'}
+          });
         dispatch(getAllProducts(user.id))
         handleOpen()
     }
