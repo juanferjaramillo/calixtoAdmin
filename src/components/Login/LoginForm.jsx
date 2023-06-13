@@ -25,10 +25,7 @@ export default function LoginForm() {
   const submitHandler = async ({ email, password }) => {
     try {
 
-      //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       await axios.post(`/session`, { email, password });
-      //ESTA PETICION LA RECHAZA CORS  
-      //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
       dispatch(getAuthUser(email));
       navigate("/dashboard");
@@ -85,7 +82,7 @@ export default function LoginForm() {
                 Forgot your password?
               </Typography> */}
               <Button type="submit" variant="contained" disabled={isSubmitting}
-              sx={{mt: 3, backgroundColor: "purple"}}
+                sx={{ mt: 3, backgroundColor: "purple" }}
               >
                 Ingresar
               </Button>
