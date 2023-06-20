@@ -6,6 +6,7 @@ import {
   ListItemButton,
   ListItemIcon,
   Toolbar,
+  Button
 } from "@mui/material";
 import PeopleIcon from "@mui/icons-material/People";
 import FolderCopyIcon from "@mui/icons-material/FolderCopy";
@@ -82,6 +83,9 @@ const navigate =useNavigate();
 
           <ListItemText sx={{ marginLeft: 1 }} primary="Estadísticas" />
         </ListItemButton>
+      </ListItem>
+      <ListItem>
+        <Button>Load CSV</Button>
       </ListItem>
     </List>
   </div>
