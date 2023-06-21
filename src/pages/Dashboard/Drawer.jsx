@@ -84,9 +84,7 @@ const navigate =useNavigate();
           <ListItemText sx={{ marginLeft: 1 }} primary="Estadísticas" />
         </ListItemButton>
       </ListItem>
-      <ListItem>
-        <Button>Load CSV</Button>
-      </ListItem>
+
     </List>
   </div>
       )
