@@ -15,16 +15,28 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import ListItemText from "@mui/material/ListItemText";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Grid from "@mui/material/Grid";
 
 
 //======================Component===========================
 function DrawerContent() {
 const navigate =useNavigate();
+const logoOwner = useSelector(state=>state.authUser.logoOwner)
 
 //------------------render---------------------------
     return (
  <div>
-    <Toolbar />
+    {/* <Toolbar /> */}
+    <Grid item>
+        <img
+          height="55vh"
+          width="180vh"
+          alt="Logo Cliente"
+          src={logoOwner}
+          style={{ objectFit: "contain" }}
+        ></img>
+      </Grid>
     <Divider />
     <List>
       <ListItem key={"Productos"} disablePadding>

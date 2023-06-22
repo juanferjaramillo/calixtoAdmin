@@ -1,13 +1,26 @@
-import React from 'react'
-import { Box } from '@mui/material'
-import useProducts from '../../hooks/useProducts'
-import Card from '../../components/Card/Card.jsx'
+import React from "react";
+import { Box } from "@mui/material";
+import useProducts from "../../hooks/useProducts";
+import Card from "../../components/Card/Card.jsx";
+import OwnerProfile from "./OwnerProfile.jsx";
 
 export default function Content({ setModalOpen, modalOpen }) {
   const products = useProducts();
   return (
-    <Box sx={{display: "flex", flexWrap:"wrap", padding:"10px", marginTop:"20px", justifyContent:"space-around"}}>
-      {products?.map((product, index) => {
+    <Box
+      sx={{
+        display: "flex",
+        flexWrap: "wrap",
+        padding: "10px",
+        marginTop: "20px",
+        justifyContent: "space-around",
+      }}
+    >
+
+      <OwnerProfile />
+
+  
+      {/* {products?.map((product, index) => {
         return (
           <Card
             key={index}
@@ -23,8 +36,8 @@ export default function Content({ setModalOpen, modalOpen }) {
             setModalOpen={setModalOpen}
             modalOpen={modalOpen}
           />
-        )
-      })}
+        );
+      })} */}
     </Box>
-  )
+  );
 }

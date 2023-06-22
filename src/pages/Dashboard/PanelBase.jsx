@@ -15,6 +15,8 @@ import { Modal } from "../../components/Modals/EditModal/Modal";
 import EditForm from "./EditForm";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Grid from "@mui/material/Grid"
 
 const drawerWidth = 200;
 
@@ -23,6 +25,9 @@ function PanelBase(props) {
   const navigate = useNavigate();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const nameOwner = useSelector((state) => state.authUser.name);
+  const sloganOwner = useSelector((state) => state.authUser.sloganOwner);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -33,17 +38,18 @@ function PanelBase(props) {
 
   return (
     <Box>
-      <CssBaseline />
       <AppBar
         sx={{
-          width: "100vw",
+          // ml: "30vw",
+          width: "82vw",
           height: "64px",
-          backgroundColor: "orange",
+          backgroundColor: "purple",
           position: "fixed",
           display: "flex",
           justifyContent: "center",
           flexGrow: 1,
           zIndex: 2,
+          paddingLeft: 3
         }}
       >
         <IconButton
@@ -58,6 +64,16 @@ function PanelBase(props) {
         >
           <MenuIcon />
         </IconButton>
+        <Grid item>
+          <Typography
+            variant="h6"
+            // noWrap
+            component="div"
+            sx={{ fontSize: { xs: "100%", md: "130%", md: "160%" } }}
+          >
+            {nameOwner}: {sloganOwner}
+          </Typography>
+        </Grid>
       </AppBar>
       <Box sx={{ display: "flex" }}>
         <Box
