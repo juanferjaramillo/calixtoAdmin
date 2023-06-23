@@ -5,6 +5,7 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAuthUser } from "../../redux/actions";
+import { getAllProducts } from "../../redux/actions";
 import { Toaster, toast } from "sonner";
 import axios from "axios";
 
@@ -18,6 +19,7 @@ const validationSchema = Yup.object({
   password: Yup.string().required("Por favor ingrese su contraseña"),
 });
 
+//==========================Component=================
 export default function LoginForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -26,16 +28,20 @@ export default function LoginForm() {
     try {
 
       await axios.post(`/session`, { email, password });
-
       dispatch(getAuthUser(email));
-      navigate("/dashboard");
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 300);
     } catch ({ response }) {
       toast("La identificación o la contraseña son incorrectos 😳");
       // alert('La identificación o la contraseña son incorrectos 😳')
     }
   };
 
+  //-----------------------render------------------------
   return (
+    <Box>
+    <Toaster />
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
@@ -91,5 +97,6 @@ export default function LoginForm() {
         );
       }}
     </Formik>
+    </Box>
   );
 }

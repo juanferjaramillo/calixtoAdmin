@@ -15,10 +15,11 @@ import { Modal } from "../../components/Modals/EditModal/Modal";
 import EditForm from "./EditForm";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import Grid from "@mui/material/Grid"
+import { useDispatch, useSelector } from "react-redux";
+import Grid from "@mui/material/Grid";
+import {logout} from "../../redux/actions"
 
-const drawerWidth = 200;
+const drawerWidth = 180;
 
 //===================component=============
 function PanelBase(props) {
@@ -29,9 +30,17 @@ function PanelBase(props) {
   const nameOwner = useSelector((state) => state.authUser.name);
   const sloganOwner = useSelector((state) => state.authUser.sloganOwner);
 
+  const dispatch = useDispatch();
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    sessionStorage.clear();
+    navigate("/");
+  }
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
@@ -41,15 +50,19 @@ function PanelBase(props) {
       <AppBar
         sx={{
           // ml: "30vw",
-          width: "82vw",
-          height: "64px",
+          // width: "82vw",
+          width: { md: `calc(100% - ${drawerWidth}px)` },
+          ml: { md: `${drawerWidth}px` },
+          // height: "64px",
           backgroundColor: "purple",
           position: "fixed",
           display: "flex",
-          justifyContent: "center",
+          flexDirection: "row",
+          justifyContent: "space-between",
           flexGrow: 1,
           zIndex: 2,
-          paddingLeft: 3
+          padding: 2,
+
         }}
       >
         <IconButton
@@ -73,6 +86,15 @@ function PanelBase(props) {
           >
             {nameOwner}: {sloganOwner}
           </Typography>
+        </Grid>
+        <Grid>
+          <Button
+          variant="outlined"
+          onClick={handleLogout}
+          sx={{color: "white",fontSize: { xs: "80%", md: "90%", md: "100%" }}}
+          >
+            Salir
+          </Button>
         </Grid>
       </AppBar>
       <Box sx={{ display: "flex" }}>

@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid";
 import { useSelector } from "react-redux";
 
 const columns = [
-  { field: "codigo", headerName: "codigo", width: 100 },
+  { field: "id", headerName: "codigo", width: 100 },
   { field: "nombre", headerName: "nombre", width: 300 },
   {
     field: "precioBase",
@@ -30,7 +30,7 @@ function DataTable() {
   myProds = myProds.map((p, i) => {
     return {
       id: i,
-      codigo: p.codigo,
+      codigo: p.id,
       nombre: p.nombre,
       precioBase: p.precioBase,
       iva: `${p.tax.tax}%`,

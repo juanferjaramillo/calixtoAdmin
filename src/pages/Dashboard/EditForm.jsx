@@ -23,7 +23,7 @@ export default function EditForm({ id }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.authUser);
   const product = useSelector((state) => state.filteredProducts).find(
-    (product) => product.codigo === id
+    (product) => product.id === id
   );
   const states = useSelector((state) => state.authUser.states);
   const isState = states.length > 0;

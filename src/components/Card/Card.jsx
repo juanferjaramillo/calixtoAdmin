@@ -72,7 +72,7 @@ function Card(props) {
       confirmButtonText: 'Confirm'
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(deleteProduct(props.codigo))
+        dispatch(deleteProduct(props.id))
       }
     });
   }
@@ -95,7 +95,7 @@ function Card(props) {
       }}
     >
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-        <IconButton onClick={() => { handleOpen(props.codigo) }}>
+        <IconButton onClick={() => { handleOpen(props.id) }}>
           <ModeEditIcon />
         </IconButton>
         <IconButton onClick={deleteHandler}>
@@ -175,7 +175,7 @@ function Card(props) {
               textAlign: "center",
             }}
           >
-            {`Codigo: ${props.codigo}`}
+            {`Codigo: ${props.id}`}
           </Typography>
 
           <img

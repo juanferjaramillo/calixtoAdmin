@@ -1,5 +1,5 @@
 const columns = [
-  "codigo",
+  "id",
   "nombre",
   "codigoBarras",
   "embalaje",
@@ -48,7 +48,7 @@ export const validateCSV = (arrProd) => {
   //---------validate tipos de datos segun el modelo de Product-------------------
   const sino = ["SI", "NO", "si", "no", "Si", "No"];
   arrProd.map((p) => {
-    if (p.codigo && isNaN(p.codigo)) {
+    if (p.id && isNaN(p.id)) {
       console.log("error1");
       resultado = false;
     }

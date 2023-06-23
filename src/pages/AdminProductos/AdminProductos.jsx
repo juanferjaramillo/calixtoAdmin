@@ -8,31 +8,42 @@ import axios from "axios";
 import { Typography } from "@mui/material";
 import PanelBase from "../Dashboard/PanelBase";
 import { validateCSV } from "./validateCSV";
+import DataGridProds from "./DataGridProds";
+import { useDispatch, useSelector } from "react-redux";
+import {getAllProducts} from "../../redux/actions"
+import { Toaster, toast } from "sonner";
 
 //====================COMPONENT=======================
 const ImportPoducts = () => {
   const [loader, setLoader] = useState(false);
+  const [render, setRender] = useState(false);
   const loadRef = useRef();
   const updateRef = useRef();
+  const dispatch = useDispatch();
+  const owner = useSelector(state=>state.authUser.id)
 
   const handleLoadFile = (event) => {
     const file = event.target.files[0];
     Papa.parse(file, {
       header: true,
       complete: async (result) => {
-        const validacion = validateCSV(result.data);
-        console.log("validacion", validacion);
+        const resultData = result.data
+        const validacion = validateCSV(resultData);
+        // console.log("validacion", validacion);
 
         if (validacion) {
           setLoader(true);
           try {
-            const r = await axios.post("/bulkcreate", result.data);
-            alert("Importación finalizada");
+            const r = await axios.post("/bulkcreate", {resultData, owner} );
+            dispatch(getAllProducts(owner))
+            toast.success("Importación finalizada");
+            setRender(render=>!render);
+
           } catch (error) {
-            alert("Error en la importacion - los productos ya existen?");
+            toast.error("Error en la importacion - los productos ya existen?");
           }
           setLoader(false);
-        } else { alert("error en los datos!");}
+        } else { toast.error("error en los datos!");}
         event.target.value = null; //resets the file input
       },
     });
@@ -51,12 +62,12 @@ const ImportPoducts = () => {
 
           try {
             const r = await axios.patch("/updateProducts", result.data);
-            alert("Actualización finalizada");
+            toast.success("Actualización finalizada");
           } catch (error) {
-            alert("Error actualizando la información");
+            toast.error("Error actualizando la información");
           }
           setLoader(false);
-        } else { alert("error en los datos!");}
+        } else { toast.error("error en los datos!");}
         event.target.value = null;
       },
     });
@@ -65,7 +76,31 @@ const ImportPoducts = () => {
   //---------------Render------------------------
   return (
     <PanelBase>
-      <Box marginBottom={2} justifyContent={"center"}>
+     <Toaster />
+      <Box
+      width={"80vw"}
+      // border={1}
+      display={"flex"}
+      flexDirection={"column"}
+      sx={{mb:3}}
+      alignItems={"center"}
+      >
+        <Typography
+        variant="h4"
+        padding={3}
+        >
+          Mis Productos
+          </Typography>
+        <DataGridProds />
+      </Box>
+
+      <Box 
+      display={"flex"}
+      justifyContent={"center"}
+      marginBottom={2} 
+      width={"80vw"}
+      // border={1}
+      >
         <input
           type="file"
           accept=".csv"
@@ -108,8 +143,8 @@ const ImportPoducts = () => {
           Actualizar Productos
         </Button>
 
-        {loader ? <Typography>Loading Data...</Typography> : null}
       </Box>
+        {loader ? <Typography>Loading Data...</Typography> : null}
     </PanelBase>
   );
 };

@@ -46,7 +46,7 @@ export default function OwnerProfile() {
         >
           <Grid
             item
-            // border={1}
+            // boxShadow={1}
             // borderColor={"orange"}
             display={"flex"}
             justifyContent={"space-between"}
