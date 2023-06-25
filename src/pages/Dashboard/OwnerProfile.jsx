@@ -26,7 +26,7 @@ export default function OwnerProfile() {
         justifyContent={"space-around"}
         alignItems={"center"}
         width={"40vw"}
-        height={"30vh"}
+        height={"50vh"}
         borderRadius={"5%"}
         boxShadow={10}
         sx={{mb:"10vh"}}
@@ -51,13 +51,15 @@ export default function OwnerProfile() {
             display={"flex"}
             justifyContent={"space-between"}
           >
-            <Badge badgeContent={"Editar"} color="primary">
+            {/* <Badge badgeContent={"Editar"} color="primary"> */}
               <img
                 src={logoOwner}
                 width={200}
+                height={180}
                 style={{ objectFit: "contain" }}
+                // border={1}
               />
-            </Badge>
+            {/* </Badge> */}
           </Grid>
           <Grid item display={"flex"} flexDirection={"column"}>
             <Grid
