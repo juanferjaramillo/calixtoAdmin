@@ -51,7 +51,7 @@ export default function Landing() {
         >
           <Grid item width={"90%"} sx={{ boxShadow: 10 }}>
             <img
-              src="https://res.cloudinary.com/dbxsr9mfc/image/upload/v1682391978/calixto/Cover_lrghp5.jpg"
+              src="https://res.cloudinary.com/sthemma/calixto/Cover_lrghp5.jpg"
               style={{ objectFit: "contain" }}
               width={"100%"}
               sx={{ boxShadow: "15" }}

@@ -106,6 +106,6 @@ export const validateCSV = (arrProd) => {
       resultado = false;
     }
   });
-  console.log(resultado);
+  // console.log(resultado);
   return resultado;
 };
