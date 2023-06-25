@@ -51,10 +51,9 @@ export default function AdminConfiguracion() {
             border={1}
           >
             <Typography textAlign={"center"} variant="h6">
-              Indicador de Disponibilidad del Producto
+              Indicador de Disponibilidad de Productos
             </Typography>
             <Divider />
-
 
             <Grid
               item
