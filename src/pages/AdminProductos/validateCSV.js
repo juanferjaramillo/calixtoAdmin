@@ -19,6 +19,10 @@ const columns = [
   "gluten",
   "portfolios",
   "ownerId",
+  "existencia",
+  "rotacion",
+  "agotado",
+  "limitado",
 ];
 
 export const validateCSV = (arrProd) => {
@@ -47,6 +51,8 @@ export const validateCSV = (arrProd) => {
 
   //---------validate tipos de datos segun el modelo de Product-------------------
   const sino = ["SI", "NO", "si", "no", "Si", "No"];
+  const iva = [0, 5, 8, 16, 19];
+
   arrProd.map((p) => {
     if (p.id && isNaN(p.id)) {
       console.log("error1");
@@ -103,6 +109,10 @@ export const validateCSV = (arrProd) => {
     }
     if (p.gluten && !sino.includes(p.gluten)) {
       console.log("error14");
+      resultado = false;
+    }
+    if (p.tax && !iva.includes(Number(p.tax))) {
+      console.log("error iva");
       resultado = false;
     }
   });
