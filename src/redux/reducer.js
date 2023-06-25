@@ -2,6 +2,7 @@ import {
   DELETE_PRODUCT,
   GET_ALL_PRODUCTS,
   GET_AUTH_USER,
+  LOGOUT
 } from "./action-types.js";
 const initialState = {
   allProducts: [],
@@ -33,6 +34,15 @@ const reducer = (state = initialState, action) => {
         allProducts: action.payload,
         filteredProducts: action.payload,
       };
+
+        case LOGOUT:
+          return {
+            ...state,
+            allProducts: [],
+            filteredProducts: [],
+            providers:[],
+            authUser:{}
+          }
 
     default:
       return {

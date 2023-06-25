@@ -1,6 +1,10 @@
 import React from "react";
 import { Grid, Typography, Box } from "@mui/material";
 import Login from "../../components/Login/Login.jsx";
+import { Link } from "react-router-dom";
+import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const styles = {
   principal: {
@@ -24,6 +28,15 @@ const styles = {
 };
 
 export default function Landing() {
+  const navigate = useNavigate();
+
+  const handleInitLoad = async () => {
+    try{
+    await axios.get('/initLoad');
+    alert("Datos iniciales cargados! 👍")
+    }catch(err){alert(err)}
+  }
+
   return (
     <Box>
       <Grid container sx={styles.principal}>
@@ -38,7 +51,7 @@ export default function Landing() {
         >
           <Grid item width={"90%"} sx={{ boxShadow: 10 }}>
             <img
-              src="https://res.cloudinary.com/dbxsr9mfc/image/upload/v1682391978/calixto/Cover_lrghp5.jpg"
+              src="https://res.cloudinary.com/sthemma/calixto/Cover_lrghp5.jpg"
               style={{ objectFit: "contain" }}
               width={"100%"}
               sx={{ boxShadow: "15" }}
@@ -59,6 +72,7 @@ export default function Landing() {
           <Login />
         </Grid>
       </Grid>
+      <Button onClick={handleInitLoad}>Init Load</Button>
     </Box>
   );
 }

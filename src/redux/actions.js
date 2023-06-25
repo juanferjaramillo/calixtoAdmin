@@ -2,6 +2,7 @@ import {
   DELETE_PRODUCT,
   GET_ALL_PRODUCTS,
   GET_AUTH_USER,
+  LOGOUT
 } from "./action-types.js";
 import axios from "axios";
 
@@ -45,3 +46,10 @@ export const getAuthUser = (usr) => {
     });
   };
 };
+
+export const logout = () => {
+  return {
+    type: LOGOUT,
+
+  }
+}
