@@ -8,9 +8,18 @@ export default function AdminPortafolios() {
 
     return (
         <PanelBase>
-        <Box>
-            <h3>Mis Portafolios</h3>
-        </Box>
-        </PanelBase>
+        <Box
+          display={"flex"}
+          flexDirection={"column"}
+          alignItems={"center"}
+          width={"80vw"}
+          padding={2}
+          // border={1}
+        >
+          <Typography variant="h4" paddingBottom={2}>
+            Mis Portafolios
+          </Typography>
+          </Box>
+          </PanelBase>
     )
 }

@@ -27,7 +27,7 @@ function PanelBase(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  const nameOwner = useSelector((state) => state.authUser.name);
+  // const nameOwner = useSelector((state) => state.authUser.name);
   const sloganOwner = useSelector((state) => state.authUser.sloganOwner);
 
   const dispatch = useDispatch();
@@ -53,7 +53,7 @@ function PanelBase(props) {
           // width: "82vw",
           width: { md: `calc(100% - ${drawerWidth}px)` },
           ml: { md: `${drawerWidth}px` },
-          // height: "64px",
+          height: "64px",
           backgroundColor: "purple",
           position: "fixed",
           display: "flex",
@@ -79,12 +79,10 @@ function PanelBase(props) {
         </IconButton>
         <Grid item>
           <Typography
-            variant="h6"
-            // noWrap
             component="div"
             sx={{ fontSize: { xs: "100%", md: "130%", md: "160%" } }}
           >
-            {nameOwner}: {sloganOwner}
+            {sloganOwner}
           </Typography>
         </Grid>
         <Grid>
