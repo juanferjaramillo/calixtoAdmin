@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { DataGrid } from "@mui/x-data-grid";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 const columns = [
   { field: "id", headerName: "CÓDIGO", width: 100 },
@@ -16,6 +16,8 @@ const columns = [
 //=====================COMPONENT=========================
 
 export default function DataGridProds() {
+  const dispatch = useDispatch()
+
   const rows = useSelector((state) => state.filteredProducts);
   const rowsTable = rows.map((r) => {
     return {
@@ -26,10 +28,21 @@ export default function DataGridProds() {
     };
   });
 
+const handleCellChange = (prod, newData) => {
+  console.log("prod", prod.row);
+  console.log("prod.field", prod.field);
+  console.log("new", newData.target.value);
+  let newProd = {...prod.row};
+  newProd[prod.field] = newData.target.value;
+  console.log("newProd", newProd);
+  //Hacer la action para actualizar el producto con newProd y actualizar redux
+  // dispatch(updateProd)
+}
+
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
-      sx={{ml:"3vw"}}
+        sx={{ ml: "3vw" }}
         showColumnVerticalBorder={true}
         showCellVerticalBorder={true}
         rows={rowsTable}
@@ -38,9 +51,11 @@ export default function DataGridProds() {
           pagination: {
             paginationModel: { page: 0, pageSize: 5 },
           },
-
         }}
+        // onCellEditStop={(element,newData) => {console.log(element), console.log(newData.target.value)} }
         pageSizeOptions={[5, 10]}
+        // onCellEditStop={(element,newData) => {console.log(element), console.log(newData.target.value)} }
+        onCellEditStop={(prod, newData)=>handleCellChange(prod, newData)}
         // checkboxSelection
       />
     </div>

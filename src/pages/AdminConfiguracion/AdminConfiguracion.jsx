@@ -10,25 +10,45 @@ import { useRef } from "react";
 import { useEffect } from "react";
 import Badge from "@mui/material/Badge";
 import { useState } from "react";
-// import { useState } from "react";
+import { Toaster, toast } from "sonner";
+import axios from "axios";
+import { getAuthUser } from "../../redux/actions";
 
 export default function AdminConfiguracion() {
-  const refInLlegado = useRef();
-  const [colorPrimario, setColorPrimario] = useState("");
-  const [colorSecundario, setColorSecundario] = useState("");
-  const [colorTerciario, setColorTerciario] = useState("");
+  const dispatch = useDispatch();
 
+  const cp = useSelector((state) => state.authUser.colorPrimario);
+  const cs = useSelector((state) => state.authUser.colorSecundario);
+  const ct = useSelector((state) => state.authUser.colorTerciario);
   const llegado = useSelector((state) => state.authUser.llegado);
+  const id = useSelector((state) => state.authUser.id);
+
+  const refInLlegado = useRef();
+  const refCP = useRef();
+  const refCS = useRef();
+  const refCT = useRef();
+
+  const [colorPrimario, setColorPrimario] = useState(cp);
+  const [colorSecundario, setColorSecundario] = useState(cs);
+  const [colorTerciario, setColorTerciario] = useState(ct);
+  const [limitado, setLimitado] = useState(null);
+  const [agotado, setAgotado] = useState(null);
+  const [llegadoN, setLlegadoN] = useState(llegado);
 
   useEffect(() => {
     refInLlegado.current.value = llegado;
+    refCP.current.value = cp || "standard";
+    refCS.current.value = cs || "standard";
+    refCT.current.value = ct || "standard";
   }, []);
 
   const handleLlegadoChange = (event) => {
     refInLlegado.current.value = event.target.value;
+    setLlegadoN(event.target.value);
   };
 
   const handleColorPrimario = (event) => {
+    // refCP.current.value = event.target.value;
     setColorPrimario(event.target.value);
   };
 
@@ -40,8 +60,36 @@ export default function AdminConfiguracion() {
     setColorTerciario(event.target.value);
   };
 
+  const handleAgotado = (event) => {
+    setAgotado(event.target.value);
+  };
+
+  const handleLimitado = (event) => {
+    setLimitado(event.target.value);
+  };
+
+  const handleGuardarConfig = async () => {
+    console.log("llegadoN", llegadoN);
+    const updatedConfig = {
+      id,
+      colorPrimario,
+      colorSecundario,
+      colorTerciario,
+      llegado: llegadoN,
+    };
+    let updateProdLimits = { ownerId: id };
+    agotado ? (updateProdLimits.agotado = agotado) : null;
+    limitado ? (updateProdLimits.limitado = limitado) : null;
+
+    await axios.patch("/updateOwner", updatedConfig);
+    await axios.patch(`/updateallproducts/`, updateProdLimits);
+    dispatch(getAuthUser(id));
+    toast.success("Configuración Guardada ✅");
+  };
+
   return (
     <PanelBase>
+      <Toaster />
       <Box
         display={"flex"}
         flexDirection={"column"}
@@ -85,9 +133,9 @@ export default function AdminConfiguracion() {
               alignItems={"center"}
               margin={1}
             >
-              <Typography>Primario:</Typography>
+              <Typography>Primario (hex): #</Typography>
               <Grid item width={"90px"}>
-                <Input onChange={handleColorPrimario} />
+                <Input onChange={handleColorPrimario} inputRef={refCP} />
               </Grid>
               <Grid
                 item
@@ -106,9 +154,9 @@ export default function AdminConfiguracion() {
               alignItems={"center"}
               margin={1}
             >
-              <Typography>Secundario:</Typography>
+              <Typography>Secundario (hex): #</Typography>
               <Grid item width={"90px"}>
-                <Input onChange={handleColorSecundario} />
+                <Input onChange={handleColorSecundario} inputRef={refCS} />
               </Grid>
               <Grid
                 item
@@ -127,9 +175,9 @@ export default function AdminConfiguracion() {
               alignItems={"center"}
               margin={1}
             >
-              <Typography>Terciario:</Typography>
+              <Typography>Terciario (hex): #</Typography>
               <Grid item width={"90px"}>
-                <Input onChange={handleColorTerciario} />
+                <Input onChange={handleColorTerciario} inputRef={refCT} />
               </Grid>
               <Grid
                 item
@@ -139,7 +187,6 @@ export default function AdminConfiguracion() {
                 backgroundColor={"#" + colorTerciario}
               ></Grid>
             </Grid>
-
           </Grid>
 
           <Grid
@@ -185,7 +232,7 @@ export default function AdminConfiguracion() {
               // marginBottom={1}
             >
               <Typography paddingRight={5}>Limitado:</Typography>
-              <Input></Input>
+              <Input onChange={handleLimitado}></Input>
               <Typography paddingRight={2}>%</Typography>
             </Grid>
 
@@ -200,7 +247,7 @@ export default function AdminConfiguracion() {
               // marginBottom={1}
             >
               <Typography paddingRight={5}>Agotado:</Typography>
-              <Input></Input>
+              <Input onChange={handleAgotado}></Input>
               <Typography paddingRight={2}>%</Typography>
             </Grid>
           </Grid>
@@ -247,7 +294,9 @@ export default function AdminConfiguracion() {
             </Grid>
           </Grid>
         </Grid>
-        <Button variant="contained">Guardar</Button>
+        <Button variant="contained" onClick={handleGuardarConfig}>
+          Guardar
+        </Button>
       </Box>
     </PanelBase>
   );

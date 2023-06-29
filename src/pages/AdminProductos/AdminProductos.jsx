@@ -12,6 +12,7 @@ import DataGridProds from "./DataGridProds";
 import { useDispatch, useSelector } from "react-redux";
 import {getAllProducts} from "../../redux/actions"
 import { Toaster, toast } from "sonner";
+import { useEffect } from "react";
 
 //====================COMPONENT=======================
 const ImportPoducts = () => {
@@ -21,6 +22,12 @@ const ImportPoducts = () => {
   const updateRef = useRef();
   const dispatch = useDispatch();
   const owner = useSelector(state=>state.authUser.id)
+
+useEffect(()=>{
+  dispatch(getAllProducts(owner))
+},
+[]);
+
 
   const handleLoadFile = (event) => {
     const file = event.target.files[0];
