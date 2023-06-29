@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useEffect } from "react";
-import { useState } from "react";
+import { useState } from "react"; 
 
 export default function AdminEstadisticas() {
   const [render, setRender] = useState(false);
