@@ -112,6 +112,7 @@ export default function OwnerProfile() {
       <Grid item>
         <Button
         variant="outlined"
+        disabled
         >Editar mis datos</Button>
       </Grid>
     </Grid>

@@ -5,9 +5,22 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useEffect } from "react";
 import { useState } from "react"; 
+import { useMemo } from "react";
 
 export default function AdminEstadisticas() {
   const [render, setRender] = useState(false);
+  let [cont, setCont] = useState(0);
+
+  // useEffect(
+  //   ()=>console.log(cont),[cont]
+  // )
+
+  // useMemo(()=>console.log(cont),[cont])
+
+  setInterval(() => {
+    setCont(c=>c+1);
+    console.log(cont);
+  }, 1000);  
 
   return (
     <PanelBase>

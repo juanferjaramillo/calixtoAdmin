@@ -2,6 +2,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { DataGrid } from "@mui/x-data-grid";
 import { useSelector, useDispatch } from "react-redux";
+import { updateProduct } from "../../redux/actions";
 
 const columns = [
   { field: "id", headerName: "CÓDIGO", width: 100 },
@@ -18,6 +19,7 @@ const columns = [
 export default function DataGridProds() {
   const dispatch = useDispatch()
 
+  const ownerId = useSelector(state=>state.authUser.id)
   const rows = useSelector((state) => state.filteredProducts);
   const rowsTable = rows.map((r) => {
     return {
@@ -29,14 +31,23 @@ export default function DataGridProds() {
   });
 
 const handleCellChange = (prod, newData) => {
-  console.log("prod", prod.row);
-  console.log("prod.field", prod.field);
-  console.log("new", newData.target.value);
   let newProd = {...prod.row};
+  console.log(newProd);
+
+  //Clean up the values shown in the table, to store them in the database:
+  let arrPrecioBase = (newProd.precioBase.slice(2)).split(",");
+  arrPrecioBase = (arrPrecioBase[0] + arrPrecioBase[1]);
+  newProd.precioBase = arrPrecioBase.toString();
+
+  newProd.agotado = newProd.agotado.slice(0, -1);
+  console.log(newProd.agotado);
+  newProd.limitado = newProd.limitado.slice(0, -1);
+  console.log(newProd.limitado);
+
   newProd[prod.field] = newData.target.value;
   console.log("newProd", newProd);
-  //Hacer la action para actualizar el producto con newProd y actualizar redux
-  // dispatch(updateProd)
+  console.log(ownerId);
+  dispatch(updateProduct(newProd, ownerId));
 }
 
   return (
