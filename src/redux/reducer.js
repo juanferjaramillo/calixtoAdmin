@@ -2,8 +2,10 @@ import {
   DELETE_PRODUCT,
   GET_ALL_PRODUCTS,
   GET_AUTH_USER,
-  LOGOUT
+  LOGOUT,
+  UPDATE_PRODUCT
 } from "./action-types.js";
+
 const initialState = {
   allProducts: [],
   filteredProducts: [],
@@ -34,6 +36,13 @@ const reducer = (state = initialState, action) => {
         allProducts: action.payload,
         filteredProducts: action.payload,
       };
+
+      case UPDATE_PRODUCT:
+        return {
+          ...state,
+          allProducts: action.payload,
+          filteredProducts: action.payload,
+        };
 
         case LOGOUT:
           return {

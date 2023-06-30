@@ -2,7 +2,8 @@ import {
   DELETE_PRODUCT,
   GET_ALL_PRODUCTS,
   GET_AUTH_USER,
-  LOGOUT
+  LOGOUT,
+  UPDATE_PRODUCT
 } from "./action-types.js";
 import axios from "axios";
 
@@ -24,12 +25,27 @@ export const getAllProducts = (owner) => {
 
 export const deleteProduct = (productId) => {
   return async function (dispatch) {
-    let updatedProds = await axios.delete(`/product/${productId}`);
-    const { data } = updatedProds;
+    const updatedProd = await axios.delete(`/product/${productId}`);
+    const { data } = updatedProd;
     return dispatch({
       type: DELETE_PRODUCT,
       payload: data,
     });
+  }
+}
+
+export const updateProduct = (product, ownerId) => {
+  console.log(product);
+  console.log(ownerId);
+  return async function (dispatch) {
+    await axios.patch(`/product/${product.id}`, product);
+    const updatedProds = await axios.get(`/prodsowner/${Number(ownerId)}`)
+    const {data} = updatedProds;
+    console.log(data);
+    return dispatch ({
+      type: UPDATE_PRODUCT,
+      payload: data
+    })
   }
 }
 
