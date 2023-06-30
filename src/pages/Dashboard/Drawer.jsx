@@ -6,10 +6,12 @@ import {
   ListItemButton,
   ListItemIcon,
   Toolbar,
-  Button
+  Button,
+  Box,
 } from "@mui/material";
 import PeopleIcon from "@mui/icons-material/People";
 import FolderCopyIcon from "@mui/icons-material/FolderCopy";
+import FactoryIcon from '@mui/icons-material/Factory';
 import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";
 import SettingsIcon from "@mui/icons-material/Settings";
 import BarChartIcon from "@mui/icons-material/BarChart";
@@ -18,39 +20,40 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Grid from "@mui/material/Grid";
 
-
 //======================Component===========================
 function DrawerContent() {
-const navigate =useNavigate();
-const logoOwner = useSelector(state=>state.authUser.logoOwner)
+  const navigate = useNavigate();
+  const logoOwner = useSelector((state) => state.authUser.logoOwner);
+  const ownerId = useSelector((state) => state.authUser.id);
 
-//------------------render---------------------------
-    return (
- <div>
-    {/* <Toolbar /> */}
-    <Grid item>
+  //------------------render---------------------------
+  return (
+    <Box>
+      <Grid item>
         <img
           height="55vh"
           width="180vh"
           alt="Logo Cliente"
           src={logoOwner}
-          style={{ objectFit: "contain" }}
+          onClick={() => navigate("/dashboard")}
+          style={{ objectFit: "contain", cursor: "pointer" }}
         ></img>
       </Grid>
-    <Divider />
-    <List>
-      <ListItem key={"Productos"} disablePadding>
-        <ListItemButton
-        onClick={()=>navigate('/adminProductos')}
-        >
-          <LocalGroceryStoreIcon />
-          <ListItemText sx={{ marginLeft: 1 }} primary="Productos" />
-        </ListItemButton>
-      </ListItem>
-    </List>
+      <Divider />
 
-    <Divider />
-    <List>
+      {ownerId !== 1 ?
+      <List>
+        <ListItem key={"Productos"} disablePadding>
+          <ListItemButton onClick={() => navigate("/adminProductos")}>
+            <LocalGroceryStoreIcon />
+            <ListItemText sx={{ marginLeft: 1 }} primary="Productos" />
+          </ListItemButton>
+        </ListItem>
+      </List>
+      : null}
+
+      {/* <Divider />
+      <List>
       <ListItem key={"Portfolios"} disablePadding>
         <ListItemButton
         onClick={()=>navigate('/adminPortafolios')}
@@ -59,10 +62,10 @@ const logoOwner = useSelector(state=>state.authUser.logoOwner)
           <ListItemText sx={{ marginLeft: 1 }} primary="Portfolios" />
         </ListItemButton>
       </ListItem>
-    </List>
+    </List> */}
 
-    <Divider />
-    <List>
+      {/* <Divider />
+      <List>
       <ListItem key={"Vendedores"} disablePadding>
         <ListItemButton
         onClick={()=>navigate('/adminVendedores')}
@@ -71,22 +74,20 @@ const logoOwner = useSelector(state=>state.authUser.logoOwner)
           <ListItemText sx={{ marginLeft: 1 }} primary="Vendedores" />
         </ListItemButton>
       </ListItem>
-    </List>
+    </List> */}
 
-    <Divider />
-    <List>
-      <ListItem key={"Configuración"} disablePadding>
-        <ListItemButton
-        onClick={()=>navigate('/adminConfiguracion')}
-        >
-          <SettingsIcon />
-          <ListItemText sx={{ marginLeft: 1 }} primary="Configuración" />
-        </ListItemButton>
-      </ListItem>
-    </List>
+      <Divider />
+      <List>
+        <ListItem key={"Configuración"} disablePadding>
+          <ListItemButton onClick={() => navigate("/adminConfiguracion")}>
+            <SettingsIcon />
+            <ListItemText sx={{ marginLeft: 1 }} primary="Configuración" />
+          </ListItemButton>
+        </ListItem>
+      </List>
 
-    <Divider />
-    <List>
+      <Divider />
+      {/* <List>
       <ListItem key={"Estadísticas"} disablePadding>
         <ListItemButton
         onClick={()=>navigate('/adminEstadisticas')}
@@ -97,9 +98,21 @@ const logoOwner = useSelector(state=>state.authUser.logoOwner)
         </ListItemButton>
       </ListItem>
 
-    </List>
-  </div>
-      )
-    }
+    </List> */}
+
+      {ownerId === 1 ? (
+        <List>
+          <ListItem key={"Empresas"} disablePadding>
+            <ListItemButton onClick={() => navigate("/adminEmpresas")}>
+              <FactoryIcon />
+
+              <ListItemText sx={{ marginLeft: 1 }} primary="Empresas" />
+            </ListItemButton>
+          </ListItem>
+        </List>
+      ) : null}
+    </Box>
+  );
+}
 
 export default DrawerContent;
