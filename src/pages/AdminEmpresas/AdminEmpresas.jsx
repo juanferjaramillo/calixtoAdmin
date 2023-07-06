@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getAllOwners } from "../../redux/actions";
 
-export default function AdminEstadisticas() {
+export default function AdminEmpresas() {
   const [render, setRender] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
