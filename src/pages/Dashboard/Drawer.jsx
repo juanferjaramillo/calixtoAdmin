@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import PeopleIcon from "@mui/icons-material/People";
 import FolderCopyIcon from "@mui/icons-material/FolderCopy";
-import FactoryIcon from '@mui/icons-material/Factory';
+import FactoryIcon from "@mui/icons-material/Factory";
 import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";
 import SettingsIcon from "@mui/icons-material/Settings";
 import BarChartIcon from "@mui/icons-material/BarChart";
@@ -41,16 +41,16 @@ function DrawerContent() {
       </Grid>
       <Divider />
 
-      {ownerId !== 1 ?
-      <List>
-        <ListItem key={"Productos"} disablePadding>
-          <ListItemButton onClick={() => navigate("/adminProductos")}>
-            <LocalGroceryStoreIcon />
-            <ListItemText sx={{ marginLeft: 1 }} primary="Productos" />
-          </ListItemButton>
-        </ListItem>
-      </List>
-      : null}
+      {ownerId !== 0 ? ( //disable for Sthemma
+        <List>
+          <ListItem key={"Productos"} disablePadding>
+            <ListItemButton onClick={() => navigate("/adminProductos")}>
+              <LocalGroceryStoreIcon />
+              <ListItemText sx={{ marginLeft: 1 }} primary="Productos" />
+            </ListItemButton>
+          </ListItem>
+        </List>
+      ) : null}
 
       {/* <Divider />
       <List>
@@ -76,18 +76,22 @@ function DrawerContent() {
       </ListItem>
     </List> */}
 
-      <Divider />
-      <List>
-        <ListItem key={"Configuración"} disablePadding>
-          <ListItemButton onClick={() => navigate("/adminConfiguracion")}>
-            <SettingsIcon />
-            <ListItemText sx={{ marginLeft: 1 }} primary="Configuración" />
-          </ListItemButton>
-        </ListItem>
-      </List>
+      {ownerId !== 0 ? ( //disable for Sthemma
+        <>
+          <Divider />
+          <List>
+            <ListItem key={"Configuración"} disablePadding>
+              <ListItemButton onClick={() => navigate("/adminConfiguracion")}>
+                <SettingsIcon />
+                <ListItemText sx={{ marginLeft: 1 }} primary="Configuración" />
+              </ListItemButton>
+            </ListItem>
+          </List>
+        </>
+      ) : null}
 
-      <Divider />
-      {/* <List>
+      {/* <Divider />
+      <List>
       <ListItem key={"Estadísticas"} disablePadding>
         <ListItemButton
         onClick={()=>navigate('/adminEstadisticas')}
@@ -100,7 +104,9 @@ function DrawerContent() {
 
     </List> */}
 
-      {ownerId === 1 ? (
+      {ownerId === 0 ? (
+        <>
+        <Divider />
         <List>
           <ListItem key={"Empresas"} disablePadding>
             <ListItemButton onClick={() => navigate("/adminEmpresas")}>
@@ -110,6 +116,7 @@ function DrawerContent() {
             </ListItemButton>
           </ListItem>
         </List>
+        </>
       ) : null}
     </Box>
   );

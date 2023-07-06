@@ -45,7 +45,7 @@ const ImportPoducts = () => {
             toast.success("Importación finalizada");
             setRender((render) => !render);
           } catch (error) {
-            toast.error("Error en la importacion - los productos ya existen?");
+            toast.error(`Error en la importacion - los productos ya existen? ${error}`);
           }
           setLoader(false);
         } else {
