@@ -9,7 +9,7 @@ import AdminVendedores from './pages/AdminVendedores/AdminVendedores';
 import AdminConfiguracion from './pages/AdminConfiguracion/AdminConfiguracion';
 import AdminPortafolios from './pages/AdminPortafolios/AdminPortafolios';
 import AdminEstadisticas from './pages/AdminEstadisticas/AdminEstadisticas';
-import AdminEmpresas from './pages/AdminEmpresas/adminEmpresas';
+import AdminEmpresas from './pages/AdminEmpresas/AdminEmpresas';
 
 
 axios.defaults.baseURL = import.meta.env.VITE_SERVER_URL;
