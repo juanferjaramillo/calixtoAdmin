@@ -62,7 +62,6 @@ function PanelBase(props) {
           flexGrow: 1,
           zIndex: 2,
           padding: 2,
-
         }}
       >
         <IconButton

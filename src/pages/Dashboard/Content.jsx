@@ -15,9 +15,8 @@ export default function Content({ setModalOpen, modalOpen }) {
         justifyContent: "space-around",
       }}
     >
-
+      
       <OwnerProfile />
-
     </Box>
   );
 }

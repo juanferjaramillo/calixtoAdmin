@@ -3,7 +3,8 @@ import {
   GET_ALL_PRODUCTS,
   GET_AUTH_USER,
   LOGOUT,
-  UPDATE_PRODUCT
+  UPDATE_PRODUCT,
+  GET_ALL_OWNERS,
 } from "./action-types.js";
 import axios from "axios";
 
@@ -31,23 +32,23 @@ export const deleteProduct = (productId) => {
       type: DELETE_PRODUCT,
       payload: data,
     });
-  }
-}
+  };
+};
 
 export const updateProduct = (product, ownerId) => {
   console.log(product);
   console.log(ownerId);
   return async function (dispatch) {
     await axios.patch(`/product/${product.id}`, product);
-    const updatedProds = await axios.get(`/prodsowner/${Number(ownerId)}`)
-    const {data} = updatedProds;
+    const updatedProds = await axios.get(`/prodsowner/${Number(ownerId)}`);
+    const { data } = updatedProds;
     console.log(data);
-    return dispatch ({
+    return dispatch({
       type: UPDATE_PRODUCT,
-      payload: data
-    })
-  }
-}
+      payload: data,
+    });
+  };
+};
 
 //-------------------------User actions----------------------------
 export const getAuthUser = (usr) => {
@@ -55,7 +56,7 @@ export const getAuthUser = (usr) => {
   return async function (dispatch) {
     let oneUsr = {};
     usr ? (oneUsr = (await axios.get(`/owner/${usr}`)).data) : null;
-    sessionStorage.setItem('user', JSON.stringify(oneUsr))
+    sessionStorage.setItem("user", JSON.stringify(oneUsr));
     return dispatch({
       type: GET_AUTH_USER,
       payload: oneUsr,
@@ -63,9 +64,20 @@ export const getAuthUser = (usr) => {
   };
 };
 
+//-------------------------Owner actions----------------------------
+export const getAllOwners = () => {
+  //brings all owners to the state
+  return async function (dispatch) {
+    const owners = (await axios.get("/owners")).data;
+    return dispatch({
+      type: GET_ALL_OWNERS,
+      payload: owners,
+    });
+  };
+};
+
 export const logout = () => {
   return {
     type: LOGOUT,
-
-  }
-}
+  };
+};

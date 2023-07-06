@@ -3,13 +3,15 @@ import {
   GET_ALL_PRODUCTS,
   GET_AUTH_USER,
   LOGOUT,
-  UPDATE_PRODUCT
+  UPDATE_PRODUCT,
+  GET_ALL_OWNERS,
 } from "./action-types.js";
 
 const initialState = {
   allProducts: [],
   filteredProducts: [],
   providers: [],
+  owners: [],
   authUser: JSON.parse(sessionStorage.getItem("user")) || {},
 };
 
@@ -30,6 +32,12 @@ const reducer = (state = initialState, action) => {
         providers: provs,
       };
 
+    case GET_ALL_OWNERS:
+      return {
+        ...state,
+        owners: action.payload,
+      };
+
     case DELETE_PRODUCT:
       return {
         ...state,
@@ -37,21 +45,21 @@ const reducer = (state = initialState, action) => {
         filteredProducts: action.payload,
       };
 
-      case UPDATE_PRODUCT:
-        return {
-          ...state,
-          allProducts: action.payload,
-          filteredProducts: action.payload,
-        };
+    case UPDATE_PRODUCT:
+      return {
+        ...state,
+        allProducts: action.payload,
+        filteredProducts: action.payload,
+      };
 
-        case LOGOUT:
-          return {
-            ...state,
-            allProducts: [],
-            filteredProducts: [],
-            providers:[],
-            authUser:{}
-          }
+    case LOGOUT:
+      return {
+        ...state,
+        allProducts: [],
+        filteredProducts: [],
+        providers: [],
+        authUser: {},
+      };
 
     default:
       return {
