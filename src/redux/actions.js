@@ -5,6 +5,7 @@ import {
   LOGOUT,
   UPDATE_PRODUCT,
   GET_ALL_OWNERS,
+  GET_ALL_USERS,
 } from "./action-types.js";
 import axios from "axios";
 
@@ -72,6 +73,19 @@ export const getAllOwners = () => {
     return dispatch({
       type: GET_ALL_OWNERS,
       payload: owners,
+    });
+  };
+};
+
+export const getAllUsers = (ownerId) => {
+  //brings all users (vendors) of the owner to the state
+  console.log("served by getAllUsers");
+  return async function (dispatch) {
+    const users = (await axios.get(`/users/${ownerId}`)).data;
+    console.log('usuarios', users);
+    return dispatch({
+      type: GET_ALL_USERS,
+      payload: users,
     });
   };
 };

@@ -45,7 +45,9 @@ const ImportPoducts = () => {
             toast.success("Importación finalizada");
             setRender((render) => !render);
           } catch (error) {
-            toast.error(`Error en la importacion - los productos ya existen? ${error}`);
+            toast.error(
+              `Error en la importacion - los productos ya existen? ${error}`
+            );
           }
           setLoader(false);
         } else {
@@ -134,29 +136,32 @@ const ImportPoducts = () => {
           style={{ display: "none" }}
           id="csv-update"
         />
-
-        <Button
-          sx={{ margin: "1vw" }}
-          variant="contained"
-          onClick={
-            () => loadRef.current.click()
-            //triggers a click on the element (the input) opening the file selector por uploading
-          }
-          color="primary"
-        >
-          Importar Productos
-        </Button>
-        <Button
-          sx={{ margin: "1vw" }}
-          variant="contained"
-          onClick={
-            () => updateRef.current.click()
-            //triggers a click on the element (the input) opening the file selector por uploading
-          }
-          color="primary"
-        >
-          Actualizar Productos
-        </Button>
+        {loader ? null : (
+          <>
+            <Button
+              sx={{ margin: "1vw" }}
+              variant="contained"
+              onClick={
+                () => loadRef.current.click()
+                //triggers a click on the element (the input) opening the file selector por uploading
+              }
+              color="primary"
+            >
+              Importar Productos
+            </Button>
+            <Button
+              sx={{ margin: "1vw" }}
+              variant="contained"
+              onClick={
+                () => updateRef.current.click()
+                //triggers a click on the element (the input) opening the file selector por uploading
+              }
+              color="primary"
+            >
+              Actualizar Productos
+            </Button>
+          </>
+        )}
       </Box>
       {/* {loader ? <Typography>Loading Data...</Typography> : null} */}
     </PanelBase>
