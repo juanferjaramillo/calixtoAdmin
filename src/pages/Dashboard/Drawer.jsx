@@ -40,8 +40,7 @@ function DrawerContent() {
         ></img>
       </Grid>
       <Divider />
-
-      {ownerId !== 0 ? ( //disable for Sthemma
+      {ownerId !== 0 ? (
         <List>
           <ListItem key={"Productos"} disablePadding>
             <ListItemButton onClick={() => navigate("/adminProductos")}>
@@ -51,7 +50,6 @@ function DrawerContent() {
           </ListItem>
         </List>
       ) : null}
-
       {/* <Divider />
       <List>
       <ListItem key={"Portfolios"} disablePadding>
@@ -63,20 +61,21 @@ function DrawerContent() {
         </ListItemButton>
       </ListItem>
     </List> */}
+      {ownerId !== 0 ? (
+        <>
+          <Divider />
+          <List>
+            <ListItem key={"Vendedores"} disablePadding>
+              <ListItemButton onClick={() => navigate("/adminVendedores")}>
+                <PeopleIcon />
+                <ListItemText sx={{ marginLeft: 1 }} primary="Vendedores" />
+              </ListItemButton>
+            </ListItem>
+          </List>
+        </>
+      ) : null}
 
-      {/* <Divider />
-      <List>
-      <ListItem key={"Vendedores"} disablePadding>
-        <ListItemButton
-        onClick={()=>navigate('/adminVendedores')}
-        >
-          <PeopleIcon />
-          <ListItemText sx={{ marginLeft: 1 }} primary="Vendedores" />
-        </ListItemButton>
-      </ListItem>
-    </List> */}
-
-      {ownerId !== 0 ? ( //disable for Sthemma
+      {ownerId !== 0 ? (
         <>
           <Divider />
           <List>
@@ -103,19 +102,18 @@ function DrawerContent() {
       </ListItem>
 
     </List> */}
-
       {ownerId === 0 ? (
         <>
-        <Divider />
-        <List>
-          <ListItem key={"Empresas"} disablePadding>
-            <ListItemButton onClick={() => navigate("/adminEmpresas")}>
-              <FactoryIcon />
+          <Divider />
+          <List>
+            <ListItem key={"Empresas"} disablePadding>
+              <ListItemButton onClick={() => navigate("/adminEmpresas")}>
+                <FactoryIcon />
 
-              <ListItemText sx={{ marginLeft: 1 }} primary="Empresas" />
-            </ListItemButton>
-          </ListItem>
-        </List>
+                <ListItemText sx={{ marginLeft: 1 }} primary="Empresas" />
+              </ListItemButton>
+            </ListItem>
+          </List>
         </>
       ) : null}
     </Box>

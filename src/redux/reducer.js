@@ -5,13 +5,14 @@ import {
   LOGOUT,
   UPDATE_PRODUCT,
   GET_ALL_OWNERS,
+  GET_ALL_USERS,
 } from "./action-types.js";
 
 const initialState = {
   allProducts: [],
   filteredProducts: [],
   providers: [],
-  owners: [],
+  users: [],
   authUser: JSON.parse(sessionStorage.getItem("user")) || {},
 };
 
@@ -37,6 +38,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         owners: action.payload,
       };
+
+    case  GET_ALL_USERS:
+      return {
+        ...state,
+        users: action.payload
+      }  
 
     case DELETE_PRODUCT:
       return {
